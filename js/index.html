@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Native Mastery Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #f0eff8;
+    --text2: #9896b0;
+    --text3: #5c5a72;
+    --purple: #8b5cf6;
+    --purple-dim: rgba(139,92,246,0.12);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.12);
+    --teal: #14b8a6;
+    --teal-dim: rgba(20,184,166,0.12);
+    --coral: #f97316;
+    --coral-dim: rgba(249,115,22,0.12);
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; position: relative; z-index: 1; }
+
+  /* Header */
+  .header { margin-bottom: 56px; }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .header-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--purple-dim); }
+  h1 {
+    font-family: 'Syne', sans-serif; font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #f0eff8 30%, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 16px;
+  }
+  .header-sub { font-size: 16px; color: var(--text2); line-height: 1.6; max-width: 520px; font-weight: 300; }
+
+  /* Legend */
+  .legend {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    padding: 14px 18px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .leg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); font-family: 'DM Mono', monospace; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 32px; }
+  .progress-label { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .progress-track { height: 3px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--blue)); border-radius: 2px; transition: width .4s ease; }
+
+  /* Stage */
+  .stage { margin-bottom: 8px; }
+
+  .stage-btn {
+    width: 100%; display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; border-radius: 12px;
+    background: var(--bg2); border: 1px solid var(--border);
+    cursor: pointer; text-align: left; transition: all .2s;
+    position: relative; overflow: hidden;
+  }
+  .stage-btn::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 3px 0 0 3px;
+    background: var(--stage-color, var(--purple));
+    opacity: 0; transition: opacity .2s;
+  }
+  .stage-btn:hover, .stage-btn.active {
+    background: var(--bg3); border-color: var(--border-hover);
+  }
+  .stage-btn.active::before { opacity: 1; }
+
+  .stage-num {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px;
+    background: var(--stage-color-dim, var(--purple-dim));
+    color: var(--stage-color, var(--purple));
+    border: 1px solid var(--stage-color, var(--purple));
+    border-opacity: 0.2;
+  }
+
+  .stage-meta { flex: 1; min-width: 0; }
+  .stage-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); }
+  .stage-sub { font-size: 12px; color: var(--text3); margin-top: 2px; font-weight: 300; }
+
+  .stage-right { display: flex; align-items: center; gap: 10px; }
+  .stage-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text3); }
+  .stage-arrow { font-size: 18px; color: var(--text3); transition: transform .25s; }
+  .stage-btn.active .stage-arrow { transform: rotate(90deg); color: var(--text2); }
+
+  /* Panel */
+  .panel {
+    display: none; padding: 20px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-top: none; border-radius: 0 0 12px 12px;
+    margin-top: -8px; padding-top: 28px;
+  }
+  .panel.open { display: block; }
+
+  .topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 16px; }
+
+  .topic {
+    padding: 12px 14px; border-radius: 10px;
+    background: var(--bg2); border: 1px solid var(--border);
+    transition: border-color .15s;
+  }
+  .topic:hover { border-color: var(--border-hover); }
+  .topic-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; font-family: 'Syne', sans-serif; }
+  .topic-desc { font-size: 12px; color: var(--text2); line-height: 1.5; font-weight: 300; }
+  .badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+  .badge {
+    font-size: 10px; font-family: 'DM Mono', monospace; padding: 2px 7px;
+    border-radius: 4px; border: 1px solid;
+  }
+  .b-both  { color: #a78bfa; background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.2); }
+  .b-expo  { color: #60a5fa; background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.2); }
+  .b-cli   { color: #34d399; background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.2); }
+  .b-adv   { color: #fb923c; background: rgba(251,146,60,0.1); border-color: rgba(251,146,60,0.2); }
+
+  .panel-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .panel-tip { font-size: 12px; color: var(--text3); font-weight: 300; }
+
+  /* Timeline connector */
+  .connector {
+    width: 2px; height: 12px; margin: 0 0 0 27px;
+    background: linear-gradient(var(--border), var(--border-hover));
+  }
+
+  /* Footer */
+  .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-text { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
+  .footer-tags { display: flex; gap: 8px; }
+  .footer-tag { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text3); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 600px) {
+    .topics { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="header-eyebrow">React Native — Complete Mastery Roadmap</div>
+    <h1>From zero to<br>production-ready</h1>
+    <p class="header-sub">A structured path covering both Expo and React Native CLI — every concept you need, in the order you should learn them.</p>
+  </header>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:#a78bfa"></div>Both (CLI + Expo)</div>
+    <div class="leg"><div class="leg-dot" style="background:#60a5fa"></div>Expo-specific</div>
+    <div class="leg"><div class="leg-dot" style="background:#34d399"></div>CLI-specific</div>
+    <div class="leg"><div class="leg-dot" style="background:#fb923c"></div>Advanced</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span id="prog-text">0 / 10 stages</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="roadmap"></div>
+
+  <footer class="footer">
+    <span class="footer-text">react-native-roadmap.html</span>
+    <div class="footer-tags">
+      <span class="footer-tag">Expo Router</span>
+      <span class="footer-tag">React Navigation</span>
+      <span class="footer-tag">TypeScript</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+const stages = [
+  {
+    num: "01", color: "#8b5cf6", colorDim: "rgba(139,92,246,0.12)", title: "Prerequisites",
+    sub: "Before you write a line of RN",
+    topics: [
+      { name: "JavaScript (ES6+)", desc: "Arrow functions, destructuring, spread, async/await, modules", tags: ["both"] },
+      { name: "React fundamentals", desc: "Components, props, state, hooks (useState, useEffect, useContext)", tags: ["both"] },
+      { name: "TypeScript basics", desc: "Types, interfaces, generics — used in almost all modern RN projects", tags: ["both"] },
+      { name: "Node.js & npm/yarn", desc: "Package management, scripts, understanding node_modules", tags: ["both"] },
+      { name: "Git & version control", desc: "Branching, commits, pull requests — essential workflow", tags: ["both"] },
+    ]
+  },
+  {
+    num: "02", color: "#3b82f6", colorDim: "rgba(59,130,246,0.12)", title: "Environment setup",
+    sub: "Getting your machine ready",
+    topics: [
+      { name: "Expo setup", desc: "Install Expo CLI, create project, run on device with Expo Go app", tags: ["expo"] },
+      { name: "RN CLI setup", desc: "Xcode (Mac), Android Studio, JDK, Android SDK, emulator config", tags: ["cli"] },
+      { name: "Metro bundler", desc: "How RN's JS bundler works, fast refresh, clearing cache", tags: ["both"] },
+      { name: "Running on device", desc: "USB debugging, wireless debugging, simulators vs real devices", tags: ["both"] },
+      { name: "VS Code extensions", desc: "React Native Tools, ESLint, Prettier, TypeScript support", tags: ["both"] },
+    ]
+  },
+  {
+    num: "03", color: "#8b5cf6", colorDim: "rgba(139,92,246,0.12)", title: "Core React Native",
+    sub: "The building blocks — same in both",
+    topics: [
+      { name: "Core components", desc: "View, Text, Image, ScrollView, FlatList, SectionList, TextInput", tags: ["both"] },
+      { name: "StyleSheet & Flexbox", desc: "RN uses Flexbox for all layout — no CSS, no floats, no grid", tags: ["both"] },
+      { name: "Platform API", desc: "Platform.OS, Platform.select() — iOS vs Android differences", tags: ["both"] },
+      { name: "Touchables & Pressable", desc: "TouchableOpacity, TouchableHighlight, Pressable, onPress", tags: ["both"] },
+      { name: "KeyboardAvoidingView", desc: "Handling keyboard overlap on forms", tags: ["both"] },
+      { name: "SafeAreaView", desc: "Notch, status bar, home indicator safe zones", tags: ["both"] },
+      { name: "Modal & Alert", desc: "Built-in modal overlay and alert dialogs", tags: ["both"] },
+      { name: "ActivityIndicator", desc: "Loading spinners and async state feedback", tags: ["both"] },
+    ]
+  },
+  {
+    num: "04", color: "#8b5cf6", colorDim: "rgba(139,92,246,0.12)", title: "Navigation",
+    sub: "Moving between screens",
+    topics: [
+      { name: "Expo Router", desc: "File-based routing, app/ folder, _layout.tsx, route groups, dynamic [id] routes", tags: ["expo"] },
+      { name: "React Navigation", desc: "Stack, Tab, Drawer navigators — installed and wired manually", tags: ["cli"] },
+      { name: "Stack navigation", desc: "Push/pop screens, header config, back button behavior", tags: ["both"] },
+      { name: "Tab navigation", desc: "Bottom tabs, tab bar icons, badge counts", tags: ["both"] },
+      { name: "Drawer navigation", desc: "Side menu drawer, gestures, custom drawer content", tags: ["both"] },
+      { name: "Passing params", desc: "router.push({pathname, params}) vs navigation.navigate('Screen', {id})", tags: ["both"] },
+      { name: "Deep linking", desc: "URL schemes, universal links — auto in Expo Router, manual in CLI", tags: ["both"] },
+      { name: "Auth flow pattern", desc: "Conditional navigation based on auth state", tags: ["both"] },
+    ]
+  },
+  {
+    num: "05", color: "#8b5cf6", colorDim: "rgba(139,92,246,0.12)", title: "State, data & storage",
+    sub: "Managing data in your app",
+    topics: [
+      { name: "Context API", desc: "Built-in React state sharing — good for auth, theme, locale", tags: ["both"] },
+      { name: "Zustand", desc: "Lightweight global state — recommended for most apps", tags: ["both"] },
+      { name: "Redux Toolkit", desc: "Full-scale state management for complex apps", tags: ["both"] },
+      { name: "React Query / TanStack", desc: "Server state, caching, background refetch, pagination", tags: ["both"] },
+      { name: "Axios / fetch", desc: "HTTP requests, interceptors, error handling, base URL config", tags: ["both"] },
+      { name: "AsyncStorage", desc: "Key-value persistent storage — persisting user prefs, tokens", tags: ["both"] },
+      { name: "SecureStore", desc: "Encrypted storage for sensitive data like auth tokens", tags: ["expo"] },
+      { name: "MMKV", desc: "Fast synchronous storage — CLI alternative to AsyncStorage", tags: ["cli"] },
+      { name: "SQLite / Realm", desc: "Local relational or document database for complex data", tags: ["both"] },
+    ]
+  },
+  {
+    num: "06", color: "#3b82f6", colorDim: "rgba(59,130,246,0.12)", title: "Device features & APIs",
+    sub: "Camera, location, notifications…",
+    topics: [
+      { name: "Permissions", desc: "expo-permissions or PermissionsAndroid — always request before using", tags: ["both"] },
+      { name: "Camera", desc: "expo-camera (Expo) or react-native-vision-camera (CLI)", tags: ["both"] },
+      { name: "Location", desc: "expo-location or @react-native-community/geolocation", tags: ["both"] },
+      { name: "Push notifications", desc: "expo-notifications (Expo) or Firebase Cloud Messaging (CLI)", tags: ["both"] },
+      { name: "Image picker", desc: "expo-image-picker — gallery and camera access", tags: ["expo"] },
+      { name: "File system", desc: "expo-file-system — read/write files, downloads, caching", tags: ["expo"] },
+      { name: "Sensors", desc: "Accelerometer, gyroscope, barometer via expo-sensors", tags: ["expo"] },
+      { name: "Native modules", desc: "Writing custom Obj-C/Swift/Java/Kotlin bridge code", tags: ["cli", "adv"] },
+      { name: "Biometrics", desc: "Face ID / fingerprint via expo-local-authentication or TouchID libs", tags: ["both"] },
+    ]
+  },
+  {
+    num: "07", color: "#8b5cf6", colorDim: "rgba(139,92,246,0.12)", title: "UI & animations",
+    sub: "Making the app feel great",
+    topics: [
+      { name: "React Native Paper", desc: "Material Design component library — buttons, cards, dialogs", tags: ["both"] },
+      { name: "NativeWind", desc: "Tailwind CSS utility classes for RN — works with both setups", tags: ["both"] },
+      { name: "Animated API", desc: "Built-in animation — Animated.Value, spring, timing, sequences", tags: ["both"] },
+      { name: "Reanimated 3", desc: "Worklet-based animations running on the UI thread — must learn", tags: ["both"] },
+      { name: "Gesture Handler", desc: "Pan, pinch, swipe, long press gestures — pairs with Reanimated", tags: ["both"] },
+      { name: "Lottie", desc: "After Effects / JSON-based animations — splash screens, empty states", tags: ["both"] },
+      { name: "React Native Skia", desc: "Canvas drawing, custom graphics, shaders — advanced UI", tags: ["both", "adv"] },
+    ]
+  },
+  {
+    num: "08", color: "#f97316", colorDim: "rgba(249,115,22,0.12)", title: "Testing & quality",
+    sub: "Writing reliable, maintainable apps",
+    topics: [
+      { name: "Jest", desc: "Unit testing — component renders, utility functions, mocks", tags: ["both"] },
+      { name: "RN Testing Library", desc: "Component integration tests — user-event based", tags: ["both"] },
+      { name: "Detox", desc: "E2E testing on real simulators — write flows, run automatically", tags: ["cli", "adv"] },
+      { name: "Maestro", desc: "Simple E2E YAML-based flows — great for Expo apps", tags: ["expo", "adv"] },
+      { name: "ESLint + Prettier", desc: "Code style enforcement — catch errors before runtime", tags: ["both"] },
+      { name: "TypeScript strict mode", desc: "Strict null checks, exhaustive checks — catches bugs at compile time", tags: ["both"] },
+    ]
+  },
+  {
+    num: "09", color: "#f97316", colorDim: "rgba(249,115,22,0.12)", title: "Build & deployment",
+    sub: "Getting your app to users",
+    topics: [
+      { name: "EAS Build", desc: "Expo's cloud build service — no Mac required for iOS builds", tags: ["expo"] },
+      { name: "EAS Submit", desc: "Auto-submit to App Store Connect and Play Console from CLI", tags: ["expo"] },
+      { name: "OTA updates", desc: "expo-updates — push JS updates without App Store review", tags: ["expo"] },
+      { name: "Xcode archive", desc: "Manual iOS build, signing, provisioning profiles, App Store upload", tags: ["cli"] },
+      { name: "Gradle build", desc: "Android release build, keystore signing, Play Store upload", tags: ["cli"] },
+      { name: "Code signing", desc: "Certificates, provisioning profiles, keystores — both platforms", tags: ["both"] },
+      { name: "App store assets", desc: "Icons, splash screens, screenshots, metadata, privacy labels", tags: ["both"] },
+      { name: "Fastlane", desc: "Automate builds, screenshots, deployments — advanced CI/CD", tags: ["cli", "adv"] },
+      { name: "Environment config", desc: "Dev / staging / prod environments, .env management", tags: ["both"] },
+    ]
+  },
+  {
+    num: "10", color: "#f97316", colorDim: "rgba(249,115,22,0.12)", title: "Advanced & performance",
+    sub: "Going from good to expert",
+    topics: [
+      { name: "New Architecture", desc: "JSI, Fabric renderer, TurboModules — RN's modern engine", tags: ["both", "adv"] },
+      { name: "Hermes engine", desc: "Facebook's JS engine — AOT compilation, smaller bundle", tags: ["both", "adv"] },
+      { name: "Performance profiling", desc: "Flipper, React DevTools, JS thread vs UI thread bottlenecks", tags: ["both", "adv"] },
+      { name: "FlatList optimization", desc: "getItemLayout, windowSize, keyExtractor, memo — large lists", tags: ["both", "adv"] },
+      { name: "Custom native modules", desc: "Write Swift/Kotlin code and expose it to JS", tags: ["cli", "adv"] },
+      { name: "Monorepo setup", desc: "Turborepo / Nx — sharing code between web and mobile", tags: ["both", "adv"] },
+      { name: "CI/CD pipelines", desc: "GitHub Actions, Bitrise, EAS workflows — automated delivery", tags: ["both", "adv"] },
+      { name: "App security", desc: "Certificate pinning, jailbreak detection, obfuscation", tags: ["both", "adv"] },
+    ]
+  },
+];
+
+const tagLabel = { both: "Both", expo: "Expo", cli: "CLI", adv: "Advanced" };
+const tagClass = { both: "b-both", expo: "b-expo", cli: "b-cli", adv: "b-adv" };
+
+let openIdx = null;
+const opened = new Set();
+
+function updateProgress() {
+  const pct = Math.round((opened.size / stages.length) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = opened.size + ' / ' + stages.length + ' stages';
+}
+
+function toggle(i) {
+  openIdx = openIdx === i ? null : i;
+  if (openIdx !== null) opened.add(i);
+  render();
+  updateProgress();
+}
+
+function render() {
+  const cont = document.getElementById('roadmap');
+  cont.innerHTML = stages.map((s, i) => `
+    ${i > 0 ? `<div class="connector"></div>` : ''}
+    <div class="stage">
+      <button class="stage-btn ${openIdx === i ? 'active' : ''}"
+        style="--stage-color:${s.color};--stage-color-dim:${s.colorDim}"
+        onclick="toggle(${i})">
+        <div class="stage-num" style="background:${s.colorDim};color:${s.color};border-color:${s.color}33">${s.num}</div>
+        <div class="stage-meta">
+          <div class="stage-title">${s.title}</div>
+          <div class="stage-sub">${s.sub}</div>
+        </div>
+        <div class="stage-right">
+          <span class="stage-count">${s.topics.length} topics</span>
+          <span class="stage-arrow">›</span>
+        </div>
+      </button>
+      <div class="panel ${openIdx === i ? 'open' : ''}">
+        <div class="topics">
+          ${s.topics.map(t => `
+            <div class="topic">
+              <div class="topic-name">${t.name}</div>
+              <div class="topic-desc">${t.desc}</div>
+              <div class="badges">${t.tags.map(tag =>
+                `<span class="badge ${tagClass[tag]}">${tagLabel[tag]}</span>`
+              ).join('')}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="panel-footer">
+          <span class="panel-tip">Click any stage to expand / collapse</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+render();
+updateProgress();
+</script>
+</body>
+</html>

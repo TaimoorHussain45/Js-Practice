@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taimoor Hussain · CV</title>
+    <style>
+        /* ───────────── RESET ───────────── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8ebf0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        /* ───────────── CV ───────────── */
+        .cv {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+            padding: 48px 56px;
+            border-radius: 4px;
+        }
+
+        /* ───────────── HEADER ───────────── */
+        .header {
+            border-bottom: 3px solid #1a2a3a;
+            padding-bottom: 16px;
+            margin-bottom: 22px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a2a3a;
+            letter-spacing: 1px;
+        }
+
+        .header .role {
+            font-size: 17px;
+            font-weight: 600;
+            color: #3a5a7a;
+            margin-top: 2px;
+        }
+
+        .header .contact {
+            font-size: 14px;
+            color: #2c3e50;
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 28px;
+        }
+
+        .header .contact span {
+            white-space: nowrap;
+        }
+
+        .header .contact a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .header .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* ───────────── HEADINGS ───────────── */
+        h2 {
+            font-size: 17px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #1a2a3a;
+            border-bottom: 2px solid #dce3ed;
+            padding-bottom: 6px;
+            margin-top: 26px;
+            margin-bottom: 14px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        /* ───────────── SUMMARY ───────────── */
+        .summary {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #1e2a3a;
+            text-align: justify;
+        }
+
+        .summary .highlight {
+            font-weight: 700;
+            color: #1a2a3a;
+            background: #eef3f8;
+            padding: 1px 8px;
+            border-radius: 4px;
+        }
+
+        /* ───────────── SKILLS ───────────── */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 50px;
+        }
+
+        .skills-grid .col {
+            flex: 1 1 200px;
+        }
+
+        .skills-grid .col .label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a2a3a;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .skills-grid .col .items {
+            font-size: 14px;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+
+        /* ───────────── ENTRIES ───────────── */
+        .entry {
+            margin-bottom: 20px;
+        }
+
+        .entry-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .entry-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a2a3a;
+        }
+
+        .entry-org {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #3a5a7a;
+        }
+
+        .entry-date {
+            font-size: 13.5px;
+            font-weight: 400;
+            color: #5a6f8a;
+        }
+
+        .entry-subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3a5a7a;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .project-tech {
+            font-size: 13px;
+            color: #3a5a7a;
+            font-weight: 600;
+            margin-top: 2px;
+            margin-bottom: 4px;
+        }
+
+        .entry-desc {
+            font-size: 14px;
+            line-height: 1.65;
+            color: #1e2a3a;
+            text-align: justify;
+            margin-top: 4px;
+            padding-left: 2px;
+        }
+
+        .entry-desc ul {
+            list-style: none;
+            padding-left: 4px;
+            margin-top: 2px;
+        }
+
+        .entry-desc ul li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .entry-desc ul li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: #3a5a7a;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .entry-desc .overview {
+            font-size: 13.8px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        /* ───────────── TECH STACK ───────────── */
+        .tech-stack {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+        }
+
+        .tech-stack span {
+            background: #f0f3f8;
+            color: #1a2a3a;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 14px;
+            border-radius: 16px;
+            border: 1px solid #dce3ed;
+        }
+
+        /* ───────────── DIVIDER ───────────── */
+        .entry-divider {
+            height: 1px;
+            background: #eceff5;
+            margin: 16px 0 18px;
+        }
+
+        /* ───────────── EDUCATION ───────────── */
+        .edu-item {
+            margin-bottom: 12px;
+        }
+
+        .edu-item .degree {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a2a3a;
+        }
+
+        .edu-item .institute {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #3a5a7a;
+        }
+
+        .edu-item .detail {
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .edu-item .detail strong {
+            color: #1a2a3a;
+        }
+
+        /* ───────────── PRINT ───────────── */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0.2in;
+            }
+            .cv {
+                box-shadow: none;
+                padding: 20px 30px;
+                border-radius: 0;
+            }
+            .tech-stack span,
+            .summary .highlight {
+                background: #f0f3f8;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* ───────────── RESPONSIVE ───────────── */
+        @media (max-width: 600px) {
+            .cv {
+                padding: 28px 20px;
+            }
+            .header .contact {
+                gap: 4px 14px;
+                font-size: 13px;
+            }
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .skills-grid {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cv">
+
+    <!-- ════════════ HEADER ════════════ -->
+    <div class="header">
+        <h1>Taimoor Hussain</h1>
+        <div class="role">React Native &amp; React Developer</div>
+        <div class="contact">
+            <span>📍 Gujranwala, Pakistan</span>
+            <span>📞 +92 309 703 8239</span>
+            <span>✉ <a href="mailto:taimoorhussain279@email.com">taimoorhussain279@email.com</a></span>
+            <span>🐙 <a href="https://github.com/TaimoorHussain45" target="_blank">github.com/TaimoorHussain45</a></span>
+            <span>🔗 <a href="https://www.linkedin.com/in/taimoor-hussain-017275379" target="_blank">linkedin.com/in/taimoor-hussain</a></span>
+        </div>
+    </div>
+
+    <!-- ════════════ SUMMARY ════════════ -->
+    <h2>Professional Summary</h2>
+    <p class="summary">
+        <span class="highlight">1+ year</span> of experience building cross-platform mobile apps with
+        <strong>React Native</strong> and <strong>TypeScript</strong>, shipping features that work
+        on both iOS and Android from a single, clean codebase. On the web side, I build responsive
+        interfaces with <strong>React.js</strong>, turning Figma designs into pixel-perfect UI.
+        I care about clean folder structure, reusable component architecture, meaningful TypeScript
+        types, and code that the next developer can actually read.
+    </p>
+
+    <!-- ════════════ SKILLS ════════════ -->
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+        <div class="col">
+            <span class="label">Mobile</span>
+            <div class="items">
+                React Native · Expo · NativeWind<br />
+                @gorhom/bottom-sheet · React Navigation
+            </div>
+        </div>
+        <div class="col">
+            <span class="label">Front-End</span>
+            <div class="items">
+                React.js · TypeScript · JavaScript ES2022+<br />
+                HTML5 · CSS3 · Tailwind CSS
+            </div>
+        </div>
+        <div class="col">
+            <span class="label">State / Data</span>
+            <div class="items">
+                Zustand · TanStack Query · Context API<br />
+                REST APIs · Socket.IO
+            </div>
+        </div>
+        <div class="col">
+            <span class="label">Media</span>
+            <div class="items">
+                Cloudinary · react-native-image-picker<br />
+                Lottie · expo-video
+            </div>
+        </div>
+        <div class="col">
+            <span class="label">Tooling</span>
+            <div class="items">
+                Git · GitHub · VS Code · Postman · Figma
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ EXPERIENCE ════════════ -->
+    <h2>Experience</h2>
+
+    <div class="entry">
+        <div class="entry-header">
+            <span class="entry-title">React Native Developer</span>
+            <span class="entry-date">2024 – Present</span>
+        </div>
+        <div class="entry-org">Fiverr · Freelance (Remote)</div>
+        <div class="entry-desc">
+            <ul>
+                <li>Delivered multiple production-grade mobile apps for international clients, covering feature development, bug fixing, and UI polish.</li>
+                <li>Integrated REST APIs, real-time Socket.IO events, and Cloudinary media pipelines into React Native projects.</li>
+                <li>Managed client communication, scoping, and milestone delivery independently with strong on-time ratings.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ════════════ PROJECTS ════════════ -->
+    <h2>Key Projects</h2>
+
+    <!-- Project 1 -->
+    <div class="entry">
+        <div class="entry-header">
+            <span class="entry-title">BVM Courses</span>
+        </div>
+        <div class="entry-subtitle">E-Learning Mobile Application</div>
+        <div class="project-tech">React Native · TypeScript · React Navigation · REST API</div>
+        <div class="entry-desc">
+            <div class="overview">A comprehensive e-learning platform enabling users to purchase courses, stream video content, and participate in interactive Q&amp;A sessions.</div>
+            <ul>
+                <li>Integrated video streaming with real-time progress tracking, ensuring a seamless learning experience.</li>
+                <li>Implemented secure course-unlock functionality following successful in-app payment verification.</li>
+                <li>Built a dynamic Q&amp;A thread system with real-time updates and instructor-response notifications, fostering active student-educator engagement.</li>
+            </ul>
+            <div class="tech-stack">
+                <span>React Native</span><span>TypeScript</span><span>React Navigation</span><span>REST API</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="entry-divider"></div>
+
+    <!-- Project 2 -->
+    <div class="entry">
+        <div class="entry-header">
+            <span class="entry-title">Quote a Day</span>
+        </div>
+        <div class="entry-subtitle">Daily Inspiration Application</div>
+        <div class="project-tech">React Native · TypeScript · REST API · AsyncStorage · TanStack Query</div>
+        <div class="entry-desc">
+            <div class="overview">A daily motivational quote application that delivers fresh inspirational content with category filtering, favorites management, and social sharing capabilities.</div>
+            <ul>
+                <li>Integrated a public quotes REST API with <strong>TanStack Query</strong> for efficient caching, automatic background refetching, and optimized performance.</li>
+                <li>Developed a persistent favorites system using <strong>AsyncStorage</strong>, enabling offline access to saved quotes.</li>
+                <li>Implemented social sharing functionality via <strong>React Native Share API</strong> with custom-formatted quote cards for visually appealing content distribution.</li>
+            </ul>
+            <div class="tech-stack">
+                <span>React Native</span><span>TypeScript</span><span>REST API</span><span>AsyncStorage</span><span>TanStack Query</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ EDUCATION ════════════ -->
+    <h2>Education</h2>
+
+    <div class="edu-item">
+        <div class="degree">BS Information Technology</div>
+        <div class="institute">Government College University Faisalabad</div>
+        <div class="detail">Faisalabad, Pakistan · <strong>Graduated 2025</strong></div>
+    </div>
+
+</div>
+<!-- end cv -->
+
+</body>
+</html>

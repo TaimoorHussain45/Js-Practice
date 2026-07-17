@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume · Mobile Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* main card – exactly one page width, no scrollbar inside */
+    .resume {
+      max-width: 1000px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+      padding: 2rem 2.25rem;
+      transition: all 0.2s;
+      /* no overflow, no scrollbar – content flows naturally */
+    }
+
+    /* contact header */
+    .contact-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.4rem 1.2rem;
+      font-size: 0.95rem;
+      color: #1e2b3c;
+      border-bottom: 2px solid #e9edf2;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-header .phone {
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .contact-header .email {
+      color: #0a66c2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-header .email:hover {
+      text-decoration: underline;
+    }
+    .contact-header .linkedin {
+      color: #0a66c2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .contact-header .linkedin:hover {
+      text-decoration: underline;
+    }
+    .contact-header .location {
+      margin-left: auto;
+      color: #3a4a5e;
+    }
+
+    /* summary */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #0b1c2e;
+      border-bottom: 2px solid #dce3ec;
+      padding-bottom: 0.3rem;
+      margin: 1.6rem 0 0.9rem 0;
+      text-transform: uppercase;
+    }
+
+    .summary-text {
+      background: #f7f9fc;
+      padding: 1rem 1.3rem;
+      border-radius: 14px;
+      color: #1e2b3c;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #1f6feb;
+    }
+
+    /* experience blocks */
+    .exp-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-header .role {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0b1c2e;
+    }
+
+    .exp-header .company {
+      font-weight: 600;
+      color: #1f3a57;
+      margin-left: 0.3rem;
+    }
+
+    .exp-header .date-location {
+      font-size: 0.85rem;
+      color: #4f5f72;
+      background: #f0f3f8;
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    .exp-details {
+      list-style: none;
+      padding-left: 0.2rem;
+      margin-top: 0.4rem;
+    }
+
+    .exp-details li {
+      position: relative;
+      padding-left: 1.3rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.94rem;
+      line-height: 1.5;
+      color: #1e2b3c;
+    }
+
+    .exp-details li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #1f6feb;
+      font-weight: 600;
+    }
+
+    /* education & languages inline */
+    .edu-lang-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      background: #fafcff;
+      padding: 0.8rem 1rem 1rem 1rem;
+      border-radius: 16px;
+      margin-top: 0.2rem;
+    }
+
+    .edu-item {
+      flex: 1 1 200px;
+    }
+
+    .edu-item .degree {
+      font-weight: 600;
+      color: #0b1c2e;
+    }
+
+    .edu-item .school {
+      font-weight: 500;
+      color: #1f3a57;
+    }
+
+    .edu-item .edu-date {
+      color: #4f5f72;
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 0.1rem;
+    }
+
+    .languages {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1.2rem;
+    }
+
+    .languages span {
+      background: #e9eef5;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #1e2b3c;
+    }
+
+    /* projects & achievements – two column layout */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem 1.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .project-card, .achievement-card {
+      background: #f8faff;
+      border-radius: 14px;
+      padding: 0.9rem 1.2rem 1rem 1.2rem;
+      border: 1px solid #e3eaf2;
+    }
+
+    .project-card .project-name {
+      font-weight: 700;
+      color: #0b1c2e;
+      font-size: 1rem;
+    }
+
+    .project-card .project-desc {
+      font-size: 0.9rem;
+      color: #1e2b3c;
+      margin: 0.2rem 0 0.25rem 0;
+      line-height: 1.4;
+    }
+
+    .project-card .project-link {
+      font-size: 0.8rem;
+      color: #0a66c2;
+      word-break: break-all;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .project-card .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .achievement-card .ach-title {
+      font-weight: 700;
+      color: #0b1c2e;
+      font-size: 0.98rem;
+    }
+
+    .achievement-card .ach-desc {
+      font-size: 0.9rem;
+      color: #1e2b3c;
+      line-height: 1.4;
+      margin-top: 0.15rem;
+    }
+
+    /* small adjust */
+    .inline-code {
+      background: #eef2f7;
+      padding: 0 0.3rem;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+
+    /* make it look like the original template with some spacing */
+    .extra-margin {
+      margin-top: 0.2rem;
+    }
+
+    /* no scrollbar anywhere */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    /* firefox */
+    * {
+      scrollbar-width: none;
+    }
+
+    @media (max-width: 700px) {
+      .resume {
+        padding: 1.25rem;
+      }
+      .two-col-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-header .location {
+        margin-left: 0;
+        width: 100%;
+      }
+      .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+      }
+      .exp-header .date-location {
+        white-space: normal;
+      }
+      .edu-lang-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume">
+
+    <!-- CONTACT HEADER -->
+    <div class="contact-header">
+      <span class="phone">📞 (234)-555-1234</span>
+      <a href="#" class="email">✉️ alex.dev@email.com</a>
+      <a href="#" class="linkedin">🔗 linkedin.com/in/alexdev</a>
+      <span class="location">📍 Seattle, Washington</span>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="section-title">📋 Summary</div>
+    <div class="summary-text">
+      <strong>Over 8 years of experience</strong> as a Mobile Application Developer with proficiency in Swift and Kotlin. Skilled in collaborating with cross-functional teams to deliver robust retail applications. Successfully increased app performance by <strong>30%</strong> at TechCraft Solutions, leading to enhanced user engagement.
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section-title">💼 Experience</div>
+
+    <!-- 1 -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span><span class="role">Mobile Application Developer</span> <span class="company">TechCraft Solutions</span></span>
+        <span class="date-location">01/2025 – Present · Seattle, WA</span>
+      </div>
+      <ul class="exp-details">
+        <li>Engineered a retail-focused mobile app solution, improving user engagement by <strong>30%</strong> through enhanced functionality and UX design.</li>
+        <li>Collaborated with designers and product managers to implement new features, resulting in a <strong>25%</strong> increase in app downloads year-over-year.</li>
+        <li>Streamlined application performance by reducing load times by <strong>40%</strong> using effective problem-solving techniques.</li>
+        <li>Led cross-team code reviews that improved code quality and team productivity by <strong>20%</strong> through actionable feedback.</li>
+        <li>Documented application architecture and provided training sessions to junior developers, boosting team efficiency by <strong>15%</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- 2 -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span><span class="role">Senior Mobile Developer</span> <span class="company">AppDynamics Inc.</span></span>
+        <span class="date-location">06/2021 – 12/2024 · Redmond, WA</span>
+      </div>
+      <ul class="exp-details">
+        <li>Developed and maintained a suite of retail mobile apps utilized by over <strong>500,000</strong> users annually.</li>
+        <li>Improved app performance and fixed critical bugs, achieving a <strong>98%</strong> crash-free rate for users.</li>
+        <li>Collaborated with UI/UX designers to implement intuitive design elements, increasing user satisfaction by <strong>15%</strong>.</li>
+        <li>Led weekly Agile sprints to ensure smooth project progress and timely feature rollouts.</li>
+      </ul>
+    </div>
+
+    <!-- 3 -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span><span class="role">Mobile Software Engineer</span> <span class="company">Innovative Mobile Solutions</span></span>
+        <span class="date-location">05/2018 – 05/2021 · Bellevue, WA</span>
+      </div>
+      <ul class="exp-details">
+        <li>Executed development of key application components, boosting performance metrics by <strong>25%</strong> within a year.</li>
+        <li>Fostered cross-functional communication with product teams, improving feature delivery timelines by <strong>10%</strong>.</li>
+        <li>Implemented RESTful API connections to backend services, enhancing app reliability and reducing data-fetching times by <strong>35%</strong>.</li>
+        <li>Pioneered integration of cloud messaging APIs, elevating user engagement and retention by <strong>12%</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- EDUCATION & LANGUAGES -->
+    <div class="section-title">🎓 Education &amp; Languages</div>
+    <div class="edu-lang-grid">
+      <div class="edu-item">
+        <span class="degree">Bachelor of Science in Computer Science</span><br>
+        <span class="school">University of Washington</span>
+        <span class="edu-date">01/2014 – 01/2018 · Seattle, WA</span>
+      </div>
+      <div class="languages">
+        <span>🇬🇧 English</span>
+        <span>🇪🇸 Spanish</span>
+        <span>📱 Ad (Android)</span>
+      </div>
+    </div>
+
+    <!-- PROJECTS + KEY ACHIEVEMENTS (2 columns) -->
+    <div class="section-title" style="margin-top: 1.8rem;">🚀 Projects &amp; Achievements</div>
+    <div class="two-col-grid">
+
+      <!-- left column: projects -->
+      <div>
+        <div class="project-card">
+          <div class="project-name">📱 Open Retail App</div>
+          <div class="project-desc">Developed a feature-rich retail mobile app with enhanced tracking capabilities for businesses.</div>
+          <a href="#" class="project-link">https://github.com/Aide/retail-app</a>
+        </div>
+        <div class="project-card" style="margin-top: 0.8rem;">
+          <div class="project-name">🔔 NotifyMe</div>
+          <div class="project-desc">Created an open-source notification service that increased engagement rates by 2x.</div>
+          <a href="#" class="project-link">https://github.com/Aide/notify-me</a>
+        </div>
+      </div>
+
+      <!-- right column: achievements -->
+      <div>
+        <div class="achievement-card">
+          <div class="ach-title">🏆 Awarded Developer of the Year</div>
+          <div class="ach-desc">Recognized as Developer of the Year in 2025 for exceptional performance and innovation in development metrics at TechCraft Solutions.</div>
+        </div>
+        <div class="achievement-card" style="margin-top: 0.8rem;">
+          <div class="ach-title">📈 App Download Milestone</div>
+          <div class="ach-desc">Achieved over 1 million downloads for a mobile app, exceeding company expectations and solidifying market presence.</div>
+        </div>
+        <div class="achievement-card" style="margin-top: 0.8rem;">
+          <div class="ach-title">⚡ Performance Optimization Leader</div>
+          <div class="ach-desc">Led a team to optimize performance, reducing reported issues by 40% and increasing customer satisfaction.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tiny footer note (optional) but keep clean -->
+    <div style="margin-top: 1.8rem; font-size: 0.7rem; color: #8a9aa8; text-align: right; border-top: 1px solid #e2e8f0; padding-top: 0.6rem;">
+      • mobile • swift • kotlin • retail
+    </div>
+  </div>
+  <!-- no scrollbar, content flows -->
+</body>
+</html>
