@@ -14,8 +14,8 @@
 //         console.log(this)
 //     }
 //     data()
-const data=function name() {
-    console.log("working")
+// const data=function name() {
+//     console.log("working")
     
-}
-console.log(typeof data);
+// }
+// console.log(typeof data);
