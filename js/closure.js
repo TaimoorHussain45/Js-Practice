@@ -14,3 +14,23 @@
   
 // }
 // init();
+
+// const greet=function (greeting) {
+//     return function (name){
+//         console.log(`${greeting} ${name}`);
+//     }
+    
+// }
+// // const greetHey=greet('Hey')("Taimoor");
+// // greetHey()
+// greet('Hey')("Taimoor");
+const greet= (greeting) => {
+    return function (name){
+        console.log(`${greeting} ${name}`);
+    }
+    
+}
+// greet('Hey')("Taimoor");
+// greet('Hey',"Taimoor");
+// const greetHey=greet('Hey')("Taimoor");
+// // // greetHey()
