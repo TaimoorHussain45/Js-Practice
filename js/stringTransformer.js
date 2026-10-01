@@ -23,3 +23,5 @@ console.log(repeatedLove);
 
 const newSentence = `I ${repeatedLove} learning.`;
 console.log(newSentence);
+const result = "6" - 4;
+console.log(result);
